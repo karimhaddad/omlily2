@@ -11,6 +11,31 @@
 (in-package :om)
 
 
+
+
+
+
+
+(defun reduce-num-den (list)
+    "Reduit les ratios dedoubles. C-a-d 
+si on a (14 8) il retourne (7 4)"
+
+    (let ((res list))
+      (setf res
+	    (list (/  (car res) 2)
+		  (/ (second res) 2)))
+      (if (or (ratiop (car res))
+	      (ratiop (second res)))
+	  (list (* 2 (car res))
+		(* 2 (second res)))
+	  (reduce-num-den res)
+	  )))
+
+
+
+
+
+
 ;;;maybe a big BUG
 ;;;redefined here from my patches
 (defmethod get-group-ratio ((self group) )
